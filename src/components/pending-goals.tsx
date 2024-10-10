@@ -5,7 +5,7 @@ import { getPendingGoals } from "../http/get-pending-goals";
 import { CreateGoalCompletion } from "../http/create-goal-completion";
 
 export function PendingGoals() {
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
 
   const { data } = useQuery({
     queryKey: ["pending-goals"],
@@ -18,9 +18,10 @@ export function PendingGoals() {
   }
 
   async function handleCompleteGoal(goalId: string) {
-    await CreateGoalCompletion(goalId)
+    await CreateGoalCompletion(goalId);
 
-    queryClient.invalidateQueries({ queryKey: ['summary'] })
+    queryClient.invalidateQueries({ queryKey: ["summary"] });
+    queryClient.invalidateQueries({ queryKey: ["pending-goals"] });
   }
 
   return (
